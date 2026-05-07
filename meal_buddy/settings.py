@@ -128,6 +128,14 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# When running behind a proxy/load-balancer (like Vercel), allow Django
+# to detect HTTPS using the X-Forwarded-Proto header.
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+
+# CSRF trusted origins (comma-separated env var). Include the Vercel HTTPS origin by default.
+CSRF_TRUSTED_ORIGINS = [h.strip() for h in os.getenv('CSRF_TRUSTED_ORIGINS', 'https://meal-buddy-sage.vercel.app').split(',') if h.strip()]
+
 # RAZORPAY_KEY_ID = 'rzp_test_lTV3Hhr4ayCQ'
 # RAZORPAY_KEY_SECRET = 'eFILRtRtJyDqE4Qkz5a3K9'
 
