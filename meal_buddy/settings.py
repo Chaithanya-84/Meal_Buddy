@@ -85,6 +85,17 @@ DATABASES = {
     }
 }
 
+# Allow configuring the database via a single `DATABASE_URL` env var (Postgres on hosted providers).
+# Example: postgres://USER:PASS@host:port/dbname
+try:
+    import dj_database_url
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if DATABASE_URL:
+        DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+except Exception:
+    # dj-database-url is optional locally; requirements updated for deployment.
+    pass
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
