@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'your-secure-secret-key-here-change-
 DEBUG = os.getenv('DJANGO_DEBUG', 'True') == 'True'
 
 # Allow hosts from an environment variable (comma-separated) with sensible defaults
-DEFAULT_ALLOWED = '127.0.0.1,localhost,meal-buddy-sage.vercel.app'
+DEFAULT_ALLOWED = '127.0.0.1,localhost,meal-buddy-sage.vercel.app,*'
 ALLOWED_HOSTS = [h.strip() for h in os.getenv('ALLOWED_HOSTS', DEFAULT_ALLOWED).split(',') if h.strip()]
 
 
