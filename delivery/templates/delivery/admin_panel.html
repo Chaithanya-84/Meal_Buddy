@@ -1,0 +1,64 @@
+{% extends 'delivery/base.html' %}
+{% block title %}Admin Panel - Meal Buddy{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Admin Panel</h2>
+  <div>
+    <a class="btn btn-primary me-2" href="{% url 'open_add_restaurant' %}">Add Restaurant</a>
+    <a class="btn btn-outline-dark" href="{% url 'open_show_restaurant' %}">Manage Restaurants</a>
+  </div>
+</div>
+
+<h4 class="mb-3">Restaurants</h4>
+<div class="row g-3 mb-4">
+  {% for r in restaurantList %}
+    <div class="col-md-4">
+      <div class="restaurant-card p-3">
+        <img src="{{ r.picture }}" class="food-img mb-2" alt="{{ r.name }}">
+        <h5 class="mb-1">{{ r.name }}</h5>
+        <p class="small text-muted mb-2">{{ r.cuisine }} · Rating: {{ r.rating }}</p>
+        <div class="d-flex gap-2">
+          <a class="btn btn-sm btn-outline-dark" href="{% url 'open_update_restaurant' r.id %}">Edit</a>
+          <a class="btn btn-sm btn-danger" href="{% url 'delete_restaurant' r.id %}">Delete</a>
+          <a class="btn btn-sm btn-accent" href="{% url 'open_update_menu' r.id %}">Update Menu</a>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <div class="col-12">No restaurants yet.</div>
+  {% endfor %}
+</div>
+
+<h4 class="mb-3">All Menu Items</h4>
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Restaurant</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Veg</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in itemList %}
+      <tr>
+        <td>{{ item.name }}</td>
+        <td>{{ item.restaurant.name }}</td>
+        <td class="text-truncate" style="max-width:300px">{{ item.description }}</td>
+        <td>₹{{ item.price }}</td>
+        <td>{% if item.vegeterian %}<span class="badge badge-veg">Veg</span>{% else %}<span class="badge badge-nonveg">Non-Veg</span>{% endif %}</td>
+        <td>
+          <a class="btn btn-sm btn-outline-dark" href="{% url 'open_update_menu' item.restaurant.id %}">Edit Menu</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="6">No items yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

@@ -1,14 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Welcome page</title>
-</head>
-<body>
-    <h3>Welcome to Meal Buddy!</h3>
-
-    <a href="open_signup">SIGN UP</a>
-    <br>
-    <a href="open_signin">SIGN IN</a>
-
-</body>
-</html>
+{% extends 'delivery/base.html' %}
+{% block title %}Welcome - Meal Buddy{% endblock %}
+{% block content %}
+    <section class="hero d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <h1 class="display-4 fw-light">Welcome to Meal Buddy</h1>
+                    <p class="lead text-muted">Discover delicious food from nearby restaurants. Order fast — enjoy faster.</p>
+                    <div class="mt-4">
+                        <a class="btn btn-accent btn-lg me-2" href="{% url 'open_show_restaurant' %}">Browse Restaurants</a>
+                        <a class="btn btn-outline-dark btn-lg" href="{% url 'open_signup' %}">Sign up</a>
+                    </div>
+                </div>
+                <div class="col-md-6 d-none d-md-block">
+                    <div class="hero-phone ms-auto">
+                        <div class="phone-screen" style="background-image: url('/static/delivery/img/hero.svg');"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-blobs"></div>
+    </section>
+{% endblock %}

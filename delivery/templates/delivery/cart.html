@@ -1,39 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Hi {{username}} here are you items
-    <!-- show current menu -->
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Item Image</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            {%  for item in itemList %}
+{% extends 'delivery/base.html' %}
+{% block title %}Cart - Meal Buddy{% endblock %}
+{% block content %}
+    <h3>Hi {{username}}, here are your items</h3>
+    <div class="table-responsive">
+        <table class="table menu-table align-middle mt-3">
+            <thead>
                 <tr>
-                    <td>
-                        <img src="{{ item.picture }}">
-                    </td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.description }}</td>
-                    <td>{{ item.price }}</td>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Price</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-        <h2>Total price : {{total_price}}</h2>
-        
-        <form action="{% url 'checkout' username %}">
-            <input type="submit" value="CHECK OUT" />
-        </form>
-    </table>
-</body>
-</html>
+            </thead>
+            <tbody>
+                {% for item in itemList %}
+                    <tr>
+                        <td class="d-flex align-items-center">
+                            <img src="{{ item.picture }}" class="me-3" style="width:80px; height:60px; object-fit:cover; border-radius:8px;">
+                            <div>{{ item.name }}</div>
+                        </td>
+                        <td>{{ item.description }}</td>
+                        <td>₹{{ item.price }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mt-3">
+        <h4>Total: ₹{{ total_price }}</h4>
+        <a class="btn btn-accent" href="{% url 'checkout' username %}">Checkout</a>
+    </div>
+{% endblock %}

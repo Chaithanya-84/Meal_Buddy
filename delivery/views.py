@@ -57,6 +57,15 @@ def signin(request):
 def open_add_restaurant(request):
     return render(request, 'delivery/add_restaurant.html')
 
+def admin_panel(request):
+    """Simple admin dashboard showing restaurants and menu items."""
+    restaurantList = Restaurant.objects.all()
+    itemList = Item.objects.select_related('restaurant').all()
+    return render(request, 'delivery/admin_panel.html', {
+        'restaurantList': restaurantList,
+        'itemList': itemList,
+    })
+
 def add_restaurant(request):
     if request.method == 'POST':
         name = request.POST.get('name')

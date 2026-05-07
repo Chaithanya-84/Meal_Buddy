@@ -1,0 +1,109 @@
+/* Food-themed background gradient and card styles */
+body.bg-food{
+  background: radial-gradient(1200px 600px at 10% 10%, #fff8f2 0%, #ffeedd 20%, transparent 40%),
+              radial-gradient(1000px 500px at 90% 90%, #fff6ff 0%, #ffe6fb 20%, transparent 45%),
+              linear-gradient(180deg,#fffaf6 0%, #fff7f0 50%, #fffaf6 100%);
+  background-attachment: fixed;
+  color: #2b2b2b;
+  font-family: 'Segoe UI', Roboto, -apple-system, 'Helvetica Neue', Arial;
+  overflow-x: hidden;
+}
+
+/* make main content sit above floating emojis */
+.container{ position: relative; z-index: 2; }
+
+/* floating food emojis */
+.food-floating{ position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+.food-floating .f{
+  position: absolute; font-size: 40px; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.12));
+  transform-origin: center center; opacity: .95;
+  animation: floatY linear infinite, sway ease-in-out infinite;
+}
+
+/* give each emoji its own random-ish position, size and timing */
+.food-floating .f:nth-child(1){ left:5%; top:10%; font-size:56px; animation-duration:12s; animation-delay:0s; }
+.food-floating .f:nth-child(2){ left:18%; top:60%; font-size:44px; animation-duration:9s; animation-delay:1s; }
+.food-floating .f:nth-child(3){ left:32%; top:25%; font-size:48px; animation-duration:11s; animation-delay:2s; }
+.food-floating .f:nth-child(4){ left:50%; top:5%; font-size:64px; animation-duration:14s; animation-delay:3s; }
+.food-floating .f:nth-child(5){ left:62%; top:45%; font-size:42px; animation-duration:10s; animation-delay:0.5s; }
+.food-floating .f:nth-child(6){ left:78%; top:20%; font-size:40px; animation-duration:13s; animation-delay:2.2s; }
+.food-floating .f:nth-child(7){ left:85%; top:70%; font-size:46px; animation-duration:8s; animation-delay:1.8s; }
+.food-floating .f:nth-child(8){ left:40%; top:75%; font-size:52px; animation-duration:16s; animation-delay:2.5s; }
+.food-floating .f:nth-child(9){ left:10%; top:80%; font-size:38px; animation-duration:7s; animation-delay:0.7s; }
+
+@keyframes floatY{
+  0%{ transform: translateY(0) rotate(0deg); }
+  50%{ transform: translateY(-40px) rotate(8deg); }
+  100%{ transform: translateY(0) rotate(0deg); }
+}
+
+@keyframes sway{
+  0%{ transform: translateX(0) }
+  25%{ transform: translateX(8px) }
+  50%{ transform: translateX(0) }
+  75%{ transform: translateX(-8px) }
+  100%{ transform: translateX(0) }
+}
+
+/* playful colored blobs */
+.bg-blobs{ position: absolute; inset:0; z-index:0; pointer-events:none; }
+.bg-blobs::before, .bg-blobs::after{
+  content: ""; position: absolute; border-radius: 50%; opacity: .12; filter: blur(60px);
+}
+.bg-blobs::before{ width:650px; height:650px; left:-150px; top:-200px; background: linear-gradient(45deg,#ff9a76,#ffd27a); }
+.bg-blobs::after{ width:500px; height:500px; right:-120px; bottom:-150px; background: linear-gradient(45deg,#8bd3ff,#b8a6ff); }
+
+/* accents */
+.btn-accent{ background: linear-gradient(90deg,#ff7e5f,#feb47b); border: none; color: #fff; }
+
+@media (max-width: 767px){
+  .food-floating .f{ font-size: 28px !important; }
+}
+
+/* Hero section styles */
+.hero{
+  min-height: 68vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: visible;
+}
+.hero .container{ position: relative; z-index: 3; }
+.hero-phone{ width: 320px; height: 640px; display:flex; align-items:center; justify-content:center; }
+.phone-screen{
+  width: 240px;
+  height: 520px;
+  border-radius: 28px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 20px 60px rgba(15,15,15,0.25);
+  border: 8px solid rgba(255,255,255,0.85);
+}
+
+/* fallback if static hero image missing - uses Unsplash */
+.phone-screen{ background-image: url('https://images.unsplash.com/photo-1541542684-40a11e6b8f8b?q=80&w=1600&auto=format&fit=crop&crop=entropy'); }
+
+@media (max-width: 991px){
+  .phone-screen{ width:200px; height:430px; }
+  .hero{ min-height: 56vh; }
+}
+
+.restaurant-card, .item-card{
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.food-img{
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.badge-veg{ background:#4caf50; color:white; }
+.badge-nonveg{ background:#d32f2f; color:white; }
+
+.menu-table img, .restaurant-table img{ max-width:120px; height:80px; object-fit:cover; border-radius:8px; }
+
+.btn-accent{ background: linear-gradient(90deg,#ff7e5f,#feb47b); border: none; color: #fff; }

@@ -1,40 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Page</title>
-</head>
-<body>
-    <h3>Welcome {{username}}!</h3>
+{% extends 'delivery/base.html' %}
+{% block title %}Restaurants - Meal Buddy{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Welcome {{username}}!</h3>
+        <a class="btn btn-outline-dark" href="{% url 'show_cart' username %}">View Cart</a>
+    </div>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Restaurant name</th>
-                <th>Picture</th>
-                <th>Cuisine</th>
-                <th>Rating</th>
-                <th>Operations</th>
-            </tr>
-        </thead>
-        <tbody>
-            {%  for r in restaurantList %}
-                <tr>
-                    <td>{{ r.name }}</td>
-                    <td>
-                        <img src="{{ r.picture }}">
-                    </td>
-                    <td>{{ r.cuisine }}</td>
-                    <td>{{ r.rating }}</td>
-                    <td>
-                        <a href="{% url 'view_menu' r.id username %}">
-                            View Menu
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</body>
-</html>
+    <div class="row g-3">
+        {% for r in restaurantList %}
+            <div class="col-md-4">
+                <div class="restaurant-card p-2">
+                    <img src="{{ r.picture }}" class="food-img" alt="{{ r.name }}">
+                    <div class="p-3">
+                        <h5>{{ r.name }}</h5>
+                        <p class="mb-1 text-muted">{{ r.cuisine }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-secondary">Rating: {{ r.rating }}</small>
+                            <a class="btn btn-sm btn-accent" href="{% url 'view_menu' r.id username %}">View Menu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
